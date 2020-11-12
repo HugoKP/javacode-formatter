@@ -1,0 +1,11 @@
+/build/
+
+/html/
+
+*.class
+
+*.jar
+
+*.7z
+
+/dist/
