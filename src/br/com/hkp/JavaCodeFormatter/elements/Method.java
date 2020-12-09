@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  *
  * @author userhugo
  */
-public final class Function extends Elements
+public final class Method extends Elements
 {
     /*[01]---------------------------------------------------------------------
     
@@ -20,9 +20,9 @@ public final class Function extends Elements
         match = Pattern.compile("(\\b[_a-z$][\\w$]*)(\\s|\\n)*([(])").
                 matcher(editedContent);
         
-        mapOccurrences("function", 1, true);
+        mapOccurrences("method", 1, true);
         
     }//map()
     
     
-}//classe Function
+}//classe Method

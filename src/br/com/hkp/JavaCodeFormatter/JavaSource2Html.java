@@ -5,7 +5,7 @@ import br.com.hkp.JavaCodeFormatter.elements.ClassName;
 import br.com.hkp.JavaCodeFormatter.elements.Comment;
 import br.com.hkp.JavaCodeFormatter.elements.Constant;
 import br.com.hkp.JavaCodeFormatter.elements.Elements;
-import br.com.hkp.JavaCodeFormatter.elements.Function;
+import br.com.hkp.JavaCodeFormatter.elements.Method;
 import br.com.hkp.JavaCodeFormatter.elements.LiteralString;
 import br.com.hkp.JavaCodeFormatter.elements.Reserved;
 import java.io.BufferedReader;
@@ -25,6 +25,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class JavaSource2Html
 {
+    private static final String HEAD =
+"<!DOCTYPE html>\n" +
+"<html lang=\"pt-br\">\n" +
+"<head>\n" +
+"    <meta charset=\"UTF-8\">\n" +
+"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+"    <link rel=\"stylesheet\" href=\"../css/javacode.css\"/>\n" +
+"</head>\n" + 
+"<body>\n";
+    
+    private static final String FOOTER =
+"</body>\n" + "</html>";
+    
     private static final String ASPAS = "\uff02";
     private static final String ASPAS_IN_STRING = "\\\"";
     private static final String ASPAS_IN_CHAR = "'\"'";
@@ -51,7 +64,7 @@ public class JavaSource2Html
     private final ClassName className;
     private final Comment comment;
     private final Constant constant;
-    private final Function function;
+    private final Method method;
     private final LiteralString literalString;
     private final Reserved reserved;
     
@@ -83,7 +96,7 @@ public class JavaSource2Html
         className = new ClassName();
         comment = new Comment();
         constant = new Constant();
-        function = new Function();
+        method = new Method();
         literalString = new LiteralString();
         reserved = new Reserved();
       
@@ -126,8 +139,6 @@ public class JavaSource2Html
             countLinesReaded++;
             content.append(line).append("\n");
         }
-        
-        countLinesReaded = countLinesReaded + 3;
         
         htmlFile.close();
         
@@ -176,7 +187,7 @@ public class JavaSource2Html
         reserved.map();
         className.map();
         constant.map();
-        function.map();
+        method.map();
         
               
         for(String mark: Elements.MAP.keySet())
@@ -190,14 +201,16 @@ public class JavaSource2Html
             replace(FAKE_ASPAS_IN_CHAR, ASPAS_IN_CHAR) +
             "\n</code></pre>";
             
-         htmlFile.write
+        htmlFile.write
         (
+            HEAD +
             "\n<div class=\"javacode\" style=\"width:" +
             (630 + padding * 9) +
             "px;\">\n" +
             lineNumbers.toString() +
             Elements.editedContent +
-            "\n</div>"
+            "\n</div>" +
+            FOOTER
         );
         
         htmlFile.close();
