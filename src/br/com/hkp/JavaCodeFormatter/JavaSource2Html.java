@@ -3,6 +3,7 @@ package br.com.hkp.JavaCodeFormatter;
 import br.com.hkp.JavaCodeFormatter.elements.LiteralChar;
 import br.com.hkp.JavaCodeFormatter.elements.ClassName;
 import br.com.hkp.JavaCodeFormatter.elements.Comment;
+import br.com.hkp.JavaCodeFormatter.elements.CommentLine;
 import br.com.hkp.JavaCodeFormatter.elements.Constant;
 import br.com.hkp.JavaCodeFormatter.elements.Elements;
 import br.com.hkp.JavaCodeFormatter.elements.Method;
@@ -60,9 +61,10 @@ public class JavaSource2Html
     private final File inputFile;
     private final File outputFile;
     
+    private final Comment comment;
+    private final CommentLine commentLine;
     private final LiteralChar literalChar;
     private final ClassName className;
-    private final Comment comment;
     private final Constant constant;
     private final Method method;
     private final LiteralString literalString;
@@ -92,9 +94,10 @@ public class JavaSource2Html
           
         countLinesReaded = 0;
         
+        comment = new Comment();
+        commentLine = new CommentLine();
         literalChar = new LiteralChar();
         className = new ClassName();
-        comment = new Comment();
         constant = new Constant();
         method = new Method();
         literalString = new LiteralString();
@@ -155,7 +158,7 @@ public class JavaSource2Html
         
     -------------------------------------------------------------------------*/
     /**
-     * Grava um novo arquivo. Neste arquivo os emojis sao renderizados.
+     * Grava um novo arquivo. 
      * 
      * @throws IOException Em caso de erro de IO.
      */
@@ -180,15 +183,14 @@ public class JavaSource2Html
      
         lineNumbers.append("\n</div>\n");
       
-        
-        comment.map();
+        comment.map(); System.out.println("comment");
+        commentLine.map();
         literalString.map();
         literalChar.map();
         reserved.map();
         className.map();
         constant.map();
         method.map();
-        
               
         for(String mark: Elements.MAP.keySet())
             Elements.editedContent = 
