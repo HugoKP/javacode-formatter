@@ -42,7 +42,7 @@ public abstract class Elements
     ) 
     {
                
-        set = new HashSet(HASH_CAPACITY); 
+        set = new HashSet<>(HASH_CAPACITY); 
                    
         while (match.find()) set.add(match.group(group)); 
                     
