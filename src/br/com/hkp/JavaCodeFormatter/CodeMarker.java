@@ -2,21 +2,22 @@ package br.com.hkp.JavaCodeFormatter;
 
 import global.Global;
 import static global.Global.fileChooserSettings;
-import java.io.BufferedWriter;
+import static global.Global.readTextFile;
+import static global.Global.writeTextFile;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author userhugo
- */
+/******************************************************************************
+ *  
+ * @since 27 de dezembro de 2020 v1.0
+ * @version 1.0
+ * @author Hugo Kaulino Pereira
+ *****************************************************************************/
 public final class CodeMarker
 {
     private static final HashMap<String, String> HASH_MAP = 
@@ -25,21 +26,11 @@ public final class CodeMarker
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private static String readTextFile(final File file) throws IOException
-    {
-        return 
-            new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-       
-    }//readTextFile()
-    
-    /*[02]---------------------------------------------------------------------
-    
-    -------------------------------------------------------------------------*/
-    private static void map(File dir) throws IOException
+    private static void collectElements(final File dir) throws IOException
     {
         Pattern REGEX = Pattern.compile("<span class=\"xw52fz_.+?</span>");
         
-        File[] listFiles = dir.listFiles();
+        File[] listFiles = dir.listFiles(new HtmlFilter());
         
         for (File file: listFiles)
         {
@@ -64,13 +55,11 @@ public final class CodeMarker
         
     }//map()
     
-    /*[03]---------------------------------------------------------------------
+    /*[02]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    private static void editHtml(File file) throws IOException
+    private static void editDocumentation(final File file) throws IOException
     {
-        int buffer = (int)file.length() + 10000;
-        
         String htmlContent = readTextFile(file);
         
         for (String element: HASH_MAP.keySet())
@@ -78,20 +67,11 @@ public final class CodeMarker
             htmlContent = htmlContent.replace(element, HASH_MAP.get(element));
         }//for
         
-        BufferedWriter editedFile = 
-            new BufferedWriter
-            (
-                new FileWriter(file, StandardCharsets.UTF_8), buffer
-            );
-        
-              
-        editedFile.write(htmlContent);
-        
-        editedFile.close();
+        writeTextFile(file, htmlContent);
         
     }//editHtml()
     
-    /*[04]---------------------------------------------------------------------
+    /*[03]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public static void main(String[] args)
@@ -110,23 +90,23 @@ public final class CodeMarker
 
             if (dir == null) System.exit(0);
                
-            map(dir);
+            collectElements(dir);
            
             /*
-            Obtem arquivoHTML a ser editado
+            Obtem arquivo HTML a ser editado
             */
             filter = new FileNameExtensionFilter("HTML", "html", "htm", "HTML");
 
-            File file = Global.choose
+            File documentationFile = Global.choose
                         (
                             "Selecione o arquivo HTML a ser editado",
                             filter,
                             false
                         );
 
-            if (file == null) System.exit(0);
+            if (documentationFile == null) System.exit(0);
              
-            editHtml(file);
+            editDocumentation(documentationFile);
            
         }
         catch (IOException e)
@@ -135,5 +115,18 @@ public final class CodeMarker
         }
        
     }//main()
+    
+    /*-------------------------------------------------------------------------
+     *                             Classe Interna
+     ------------------------------------------------------------------------*/
+    private static final class HtmlFilter implements FilenameFilter
+    {
+        @Override
+        public boolean accept(File dir, String filename)
+        {
+            return filename.endsWith(".html");
+        }//accept()
+        
+    }//classe HtmlFilter
     
 }//classe CodeMarker

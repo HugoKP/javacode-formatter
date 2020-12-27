@@ -1,14 +1,22 @@
 package global;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author userhugo
- */
+/******************************************************************************
+ * A classe fornece metodos estaticos de inicializacao, navegacao no sistema de
+ * arquivo e leitura e gravacao de arquivos.
+ * 
+ * @since 27 de dezembro de 2020 v1.0
+ * @version 1.0
+ * @author Hugo Kaulino Pereira
+ *****************************************************************************/
 public final class Global
 {
     /*[01]---------------------------------------------------------------------
@@ -50,6 +58,9 @@ public final class Global
       
     }//FileChooserSettings()
     
+    /*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
     public static File choose
     (
         final String title,
@@ -57,7 +68,7 @@ public final class Global
         final boolean chooseDir
     )
     {
-         UIManager.put("FileChooser.openDialogTitleText", title);
+        UIManager.put("FileChooser.openDialogTitleText", title);
         
         JFileChooser fc = new JFileChooser();
         
@@ -76,5 +87,29 @@ public final class Global
             return null;
         
     }//choose()
+    
+    /*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public static String readTextFile(final File file) throws IOException
+    {
+        return 
+            new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+       
+    }//readTextFile()
+    
+    /*[04]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+   public static void writeTextFile(final File file, final String content)
+        throws IOException
+    {
+        FileWriter fw = new FileWriter(file, StandardCharsets.UTF_8);
+               
+        fw.write(content);
+        
+        fw.close();
+  
+    }//writeTextFile()
     
 }//classe Global

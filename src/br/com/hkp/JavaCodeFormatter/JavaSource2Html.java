@@ -11,19 +11,20 @@ import br.com.hkp.JavaCodeFormatter.elements.LiteralString;
 import br.com.hkp.JavaCodeFormatter.elements.Reserved;
 import global.Global;
 import static global.Global.fileChooserSettings;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import static global.Global.readTextFile;
+import static global.Global.writeTextFile;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author userhugo
- */
+/******************************************************************************
+ * A aplicacao converte um codigo fonte Java em um HTML que permite exibir este
+ * fonte no navegador web.
+ * 
+ * @since 27 de dezembro de 2020 v1.0
+ * @version 1.0
+ * @author Hugo Kaulino Pereira
+ *****************************************************************************/
 public final class JavaSource2Html
 {
     private static final String HEAD =
@@ -44,17 +45,7 @@ public final class JavaSource2Html
     private static final String ASPAS_IN_CHAR = "'\"'";
     private static final String FAKE_ASPAS_IN_STRING = "\\" + ASPAS;
     private static final String FAKE_ASPAS_IN_CHAR = "'" + ASPAS + "'";
-    
-    /*
-    Quantas linhas foram lidas do arquivo com o codigo fonte java
-    */
-    private int countLinesReaded;
-    
-    /*
-    buffer para otimizar processos de leitura e gravacao
-    */
-    private final int buffer;
-    
+      
     /*
     Arquivo que serah lido e arquivo que sera gravado
     */
@@ -85,15 +76,10 @@ public final class JavaSource2Html
     {
       
         inputFile = file;
-        
-        String absoluteFileName = inputFile.getAbsolutePath();
-        
-        buffer = (int)inputFile.length();
-       
-        outputFile = new File(absoluteFileName.replace(".java",".html"));
-          
-        countLinesReaded = 0;
-        
+   
+        outputFile = 
+            new File(inputFile.getAbsolutePath().replace(".java",".html"));
+             
         comment = new Comment();
         commentLine = new CommentLine();
         literalChar = new LiteralChar();
@@ -117,44 +103,37 @@ public final class JavaSource2Html
     }//getNumberOfDigits()
     
     /*[02]---------------------------------------------------------------------
+    Conta quantas linhas tem a String que recebeu o conteudo do arquivo texto 
+    com o codigo fonte java.
+    -------------------------------------------------------------------------*/
+    private int countLines(final String str)
+    {
+        if (str.length() == 0) return 0;
+        
+        int index = 0;
+        int count = 0;
+ 
+        while ((index = (str.indexOf('\n', index)) + 1) != 0) count++;
+  
+        return (count + 1);
+    }//countLines()
+    
+    /*[03]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    /**
-     * Le o arquivo e copia seu conteudo para uma variavel interna do objeto.
-     * 
-     * @throws IOException Em caso de erro de IO.
-     */
-    public void readFile() throws IOException
+    private void readFile() throws IOException
     {
-           
-        BufferedReader htmlFile = 
-            new BufferedReader
-            (
-                new FileReader(inputFile, StandardCharsets.UTF_8), buffer
-            );
-        
-        StringBuilder content = new StringBuilder(buffer);
-        
-        String line;
-        
-        while ((line = htmlFile.readLine()) != null)
-        {
-            countLinesReaded++;
-            content.append(line).append("\n");
-        }
-        
-        htmlFile.close();
-        
+        Elements.editedContent = readTextFile(inputFile);
+              
         Elements.editedContent = 
-            content.toString().replace("&", "&amp;").
+            Elements.editedContent.replace("&", "&amp;").
             replace("<", "&lt;").replace(">", "&gt;").
             replace(ASPAS_IN_STRING, FAKE_ASPAS_IN_STRING).
             replace(ASPAS_IN_CHAR, FAKE_ASPAS_IN_CHAR);
-        
              
     }//readFile()
     
-     /*[03]---------------------------------------------------------------------
+     /*[04]---------------------------------------------------------------------
         
     -------------------------------------------------------------------------*/
     /**
@@ -164,15 +143,12 @@ public final class JavaSource2Html
      */
     public void createNewFile() throws IOException
     {
-        BufferedWriter htmlFile = 
-            new BufferedWriter
-            (
-                new FileWriter(outputFile, StandardCharsets.UTF_8), buffer
-            );
+        readFile();
+        
+        int countLinesReaded = countLines(Elements.editedContent);
         
         int padding = getNumberOfDigits(countLinesReaded);
-        
-                
+                 
         StringBuilder lineNumbers = 
             new StringBuilder(padding * countLinesReaded + 1000);
         
@@ -202,9 +178,10 @@ public final class JavaSource2Html
             Elements.editedContent.replace(FAKE_ASPAS_IN_STRING, ASPAS_IN_STRING).
             replace(FAKE_ASPAS_IN_CHAR, ASPAS_IN_CHAR) +
             "\n</code></pre>";
-            
-        htmlFile.write
+           
+        writeTextFile
         (
+            outputFile,
             HEAD +
             "\n<div class=\"javacode\" style=\"width:" +
             (630 + padding * 9) +
@@ -215,12 +192,10 @@ public final class JavaSource2Html
             FOOTER
         );
         
-        htmlFile.close();
-        
          
     }//createNewFile()
       
-    /*[04]---------------------------------------------------------------------
+    /*[05]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public static void main(String[] args)
@@ -240,7 +215,6 @@ public final class JavaSource2Html
         try
         {
             JavaSource2Html j = new JavaSource2Html(file);
-            j.readFile();
             j.createNewFile();
         }
         catch (IOException ex)
