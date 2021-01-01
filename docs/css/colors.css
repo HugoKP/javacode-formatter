@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+:root
+{
+  --default-background:  lightgoldenrodyellow;
+
+  --iframe-javacode-background:rgb(238, 238, 192);
+
+  --link-color:rgb(223, 67, 10);
+
+  --javacode-linenumber-background: rgb(224, 120, 81);
+  --javacode-linenumber-color: black;
+
+  --javacode-method-color: olive;
+  --javacode-literalstring-color: red;
+  --javacode-reserved-color: blue;
+  --javacode-constant-color:green;
+  --javacode-comment-color: rgb(170, 166, 166);
+  --javacode-literalchar-color:hotpink;
+
+  --h1-color: rgb(148,58,24);
+
+  --h2-background:  rgb(224, 120, 81);
+  --h2-color: rgb(148,58,24);
+
+  --h3-color: rgb(148,58,24);
+  --h4-color: var(--javacode-method-color);
+  --h5-color: blue;
+  
+  --nav-background: rgb(207, 106, 70);
+  --nav-color: white;
+  --nav-border-color: white;
+  --nav-hover-color: rgb(38, 148, 128);
+  --nav-sidebar-button-background: var(--nav-hover-color);
+
+  --footer-background: var(--nav-background);
+  --footer-color: black;
+
+}
+

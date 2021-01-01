@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/javacode.css"/>
+  <title>Java Code</title>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>107</br>108</br>109</br>110</br>111</br>112</br>113</br>114</br>115</br>116</br>117</br>118</br>119</br>120</br>121</br>122</br>123</br>124</br>125</br>126</br>127</br>128</br>129</br>130</br>131</br>132</br>
+</div>
+<pre><code><span class="xw52fz_reserved">package</span> br.com.hkp.javacode_styler;
+
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">fileChooserSettings</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">readTextFile</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">writeTextFile</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">File</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">FilenameFilter</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">IOException</span>;
+<span class="xw52fz_reserved">import</span> java.util.<span class="xw52fz_classname">HashMap</span>;
+<span class="xw52fz_reserved">import</span> java.util.regex.<span class="xw52fz_classname">Matcher</span>;
+<span class="xw52fz_reserved">import</span> java.util.regex.<span class="xw52fz_classname">Pattern</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.filechooser.<span class="xw52fz_classname">FileNameExtensionFilter</span>;
+
+<span class="xw52fz_comment">/******************************************************************************
+ *  
+ * @since 27 de dezembro de 2020 v1.0
+ * @version 1.0
+ * @author Hugo Kaulino Pereira
+ *****************************************************************************/</span>
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">DocStyler</span>
+{
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">HashMap</span>&lt;<span class="xw52fz_classname">String</span>, <span class="xw52fz_classname">String</span>&gt; <span class="xw52fz_constant">HASH_MAP</span> = 
+        <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">HashMap</span>&lt;&gt;(1000);
+    
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">collectElements</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> dir) <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_classname">Pattern</span> <span class="xw52fz_constant">REGEX</span> = <span class="xw52fz_classname">Pattern</span>.<span class="xw52fz_method">compile</span>(<span class="xw52fz_literalstring">"&lt;span class=\"xw52fz_.+?&lt;/span&gt;"</span>);
+        
+        <span class="xw52fz_classname">File</span>[] <span class="xw52fz_method">listFiles</span> = dir.<span class="xw52fz_method">listFiles</span>(<span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">HtmlFilter</span>());
+        
+        <span class="xw52fz_reserved">for</span> (<span class="xw52fz_classname">File</span> file: <span class="xw52fz_method">listFiles</span>)
+        {
+              
+            <span class="xw52fz_classname">Matcher</span> m = <span class="xw52fz_constant">REGEX</span>.<span class="xw52fz_method">matcher</span>(<span class="xw52fz_method">readTextFile</span>(file));
+            
+            <span class="xw52fz_reserved">while</span>(m.<span class="xw52fz_method">find</span>())
+            {
+                <span class="xw52fz_classname">String</span> tag = m.<span class="xw52fz_method">group</span>();
+                
+                <span class="xw52fz_classname">String</span> element = 
+                    <span class="xw52fz_literalchar">'*'</span> +
+                    tag.<span class="xw52fz_method">substring</span>(tag.<span class="xw52fz_method">indexOf</span>(<span class="xw52fz_literalchar">'&gt;'</span>) + 1, tag.<span class="xw52fz_method">lastIndexOf</span>(<span class="xw52fz_literalchar">'&lt;'</span>)) +
+                    <span class="xw52fz_literalchar">'*'</span>;
+                
+                <span class="xw52fz_reserved">if</span> (!<span class="xw52fz_constant">HASH_MAP</span>.<span class="xw52fz_method">containsKey</span>(element)) <span class="xw52fz_constant">HASH_MAP</span>.<span class="xw52fz_method">put</span>(element,tag);
+                
+            }<span class="xw52fz_comment">//while</span>
+            
+        }<span class="xw52fz_comment">//for</span>
+        
+        
+    }<span class="xw52fz_comment">//map()</span>
+    
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">editDocumentation</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> file) <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_classname">String</span> htmlContent = <span class="xw52fz_method">readTextFile</span>(file);
+        
+        <span class="xw52fz_reserved">for</span> (<span class="xw52fz_classname">String</span> element: <span class="xw52fz_constant">HASH_MAP</span>.<span class="xw52fz_method">keySet</span>())
+        {
+            htmlContent = htmlContent.<span class="xw52fz_method">replace</span>(element, <span class="xw52fz_constant">HASH_MAP</span>.<span class="xw52fz_method">get</span>(element));
+        }<span class="xw52fz_comment">//for</span>
+        
+        <span class="xw52fz_method">writeTextFile</span>(file, htmlContent);
+        
+    }<span class="xw52fz_comment">//editHtml()</span>
+    
+    <span class="xw52fz_comment">/*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">main</span>(<span class="xw52fz_classname">String</span>[] args)
+    {
+        <span class="xw52fz_method">fileChooserSettings</span>();
+        
+        <span class="xw52fz_reserved">try</span>
+        {
+            <span class="xw52fz_comment">/*
+            Obtem o diretorio onde estao os arquivos HTML com fontes java
+            */</span>
+            <span class="xw52fz_classname">FileNameExtensionFilter</span> filter = 
+                <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">FileNameExtensionFilter</span>(<span class="xw52fz_literalstring">"Diret\u00f3rio"</span>, <span class="xw52fz_literalstring">"x"</span>);
+
+            <span class="xw52fz_classname">File</span> dir = <span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">choose</span>(<span class="xw52fz_literalstring">"Selecione o Diret\u00f3rio"</span>,filter, true);
+
+            <span class="xw52fz_reserved">if</span> (dir == <span class="xw52fz_reserved">null</span>) <span class="xw52fz_classname">System</span>.<span class="xw52fz_method">exit</span>(0);
+               
+            <span class="xw52fz_method">collectElements</span>(dir);
+           
+            <span class="xw52fz_comment">/*
+            Obtem arquivo HTML a ser editado
+            */</span>
+            filter = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">FileNameExtensionFilter</span>(<span class="xw52fz_literalstring">"HTML"</span>, <span class="xw52fz_literalstring">"html"</span>, <span class="xw52fz_literalstring">"htm"</span>, <span class="xw52fz_literalstring">"HTML"</span>);
+
+            <span class="xw52fz_classname">File</span> documentationFile = <span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">choose</span>
+                        (
+                            <span class="xw52fz_literalstring">"Selecione o arquivo HTML a ser editado"</span>,
+                            filter,
+                            false
+                        );
+
+            <span class="xw52fz_reserved">if</span> (documentationFile == <span class="xw52fz_reserved">null</span>) <span class="xw52fz_classname">System</span>.<span class="xw52fz_method">exit</span>(0);
+             
+            <span class="xw52fz_method">editDocumentation</span>(documentationFile);
+           
+        }
+        <span class="xw52fz_reserved">catch</span> (<span class="xw52fz_classname">IOException</span> e)
+        {
+            <span class="xw52fz_classname">System</span>.err.<span class="xw52fz_method">println</span>(e);
+        }
+       
+    }<span class="xw52fz_comment">//main()</span>
+    
+    <span class="xw52fz_comment">/*-------------------------------------------------------------------------
+     *                             Classe Interna
+     ------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">HtmlFilter</span> <span class="xw52fz_reserved">implements</span> <span class="xw52fz_classname">FilenameFilter</span>
+    {
+        @<span class="xw52fz_classname">Override</span>
+        <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">boolean</span> <span class="xw52fz_method">accept</span>(<span class="xw52fz_classname">File</span> dir, <span class="xw52fz_classname">String</span> filename)
+        {
+            <span class="xw52fz_reserved">return</span> filename.<span class="xw52fz_method">endsWith</span>(<span class="xw52fz_literalstring">".html"</span>);
+        }<span class="xw52fz_comment">//accept()</span>
+        
+    }<span class="xw52fz_comment">//classe HtmlFilter</span>
+    
+}<span class="xw52fz_comment">//classe DocStyler</span>
+
+</code></pre>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package br.com.hkp.JavaCodeFormatter.elements;
+package br.com.hkp.javacode_styler.elements;
 
 import java.util.regex.Pattern;
 
@@ -6,21 +6,18 @@ import java.util.regex.Pattern;
  *
  * @author userhugo
  */
-public final class LiteralString extends Elements
+public final class Comment extends Elements
 {
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
-    /**
-     *
-     */
     @Override
     public void map()
     {
-        match = Pattern.compile("\"(.|\\n)*?\"").matcher(editedContent);
+        match = Pattern.compile("[/][*](.|\\n)*?[*][/]").matcher(editedContent);    
         
-        mapOccurrences("literalstring", 0, false);
+        mapOccurrences("comment", 0, false);
         
     }//map()
     
-}//classe LiteralString
+}//classe Comment

@@ -1,4 +1,4 @@
-package br.com.hkp.JavaCodeFormatter.elements;
+package br.com.hkp.javacode_styler.elements;
 
 import java.util.regex.Pattern;
 
@@ -6,18 +6,22 @@ import java.util.regex.Pattern;
  *
  * @author userhugo
  */
-public final class CommentLine extends Elements
+public final class Constant extends Elements
 {
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+    /**
+     *
+     */
     @Override
     public void map()
     {
-        match = Pattern.compile("\\/\\/.*?\\n").matcher(editedContent);    
+        match = 
+            Pattern.compile("\\b([_A-Z][_A-Z0-9]*?)\\b").matcher(editedContent);
         
-        mapOccurrences("comment", 0, false);
+        mapOccurrences("constant", 0, true);
         
     }//map()
     
-}//classe CommentLine
+}//classe Constant

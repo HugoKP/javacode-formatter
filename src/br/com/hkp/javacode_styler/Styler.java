@@ -1,18 +1,18 @@
-package br.com.hkp.JavaCodeFormatter;
+package br.com.hkp.javacode_styler;
 
-import br.com.hkp.JavaCodeFormatter.elements.LiteralChar;
-import br.com.hkp.JavaCodeFormatter.elements.ClassName;
-import br.com.hkp.JavaCodeFormatter.elements.Comment;
-import br.com.hkp.JavaCodeFormatter.elements.CommentLine;
-import br.com.hkp.JavaCodeFormatter.elements.Constant;
-import br.com.hkp.JavaCodeFormatter.elements.Elements;
-import br.com.hkp.JavaCodeFormatter.elements.Method;
-import br.com.hkp.JavaCodeFormatter.elements.LiteralString;
-import br.com.hkp.JavaCodeFormatter.elements.Reserved;
-import global.Global;
-import static global.Global.fileChooserSettings;
-import static global.Global.readTextFile;
-import static global.Global.writeTextFile;
+import br.com.hkp.javacode_styler.elements.LiteralChar;
+import br.com.hkp.javacode_styler.elements.ClassName;
+import br.com.hkp.javacode_styler.elements.Comment;
+import br.com.hkp.javacode_styler.elements.CommentLine;
+import br.com.hkp.javacode_styler.elements.Constant;
+import br.com.hkp.javacode_styler.elements.Elements;
+import br.com.hkp.javacode_styler.elements.Method;
+import br.com.hkp.javacode_styler.elements.LiteralString;
+import br.com.hkp.javacode_styler.elements.Reserved;
+import br.com.hkp.javacode_styler.global.Global;
+import static br.com.hkp.javacode_styler.global.Global.fileChooserSettings;
+import static br.com.hkp.javacode_styler.global.Global.readTextFile;
+import static br.com.hkp.javacode_styler.global.Global.writeTextFile;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,27 +25,23 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  * @author Hugo Kaulino Pereira
  *****************************************************************************/
-public final class JavaSource2Html
+public final class Styler
 {
     private static final String HEAD =
 "<!DOCTYPE html>\n" +
-"<html lang=\"pt-br\">\n" +
+"<html lang=\"en\">\n" +
 "<head>\n" +
-"    <meta charset=\"UTF-8\">\n" +
-"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-"    <link rel=\"stylesheet\" href=\"../css/javacode.css\"/>\n" +
+"\t<meta charset=\"UTF-8\">\n" +
+"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
++
+"\t<link rel=\"stylesheet\" href=\"../css/javacode.css\"/>\n" +
+"\t<title>Java Code</title>\n"  +  
 "</head>\n" + 
 "<body>\n";
     
     private static final String FOOTER =
 "</body>\n" + "</html>";
-    
-    private static final String ASPAS = "\uff02";
-    private static final String ASPAS_IN_STRING = "\\\"";
-    private static final String ASPAS_IN_CHAR = "'\"'";
-    private static final String FAKE_ASPAS_IN_STRING = "\\" + ASPAS;
-    private static final String FAKE_ASPAS_IN_CHAR = "'" + ASPAS + "'";
-      
+
     /*
     Arquivo que serah lido e arquivo que sera gravado
     */
@@ -54,13 +50,12 @@ public final class JavaSource2Html
     
     private final Comment comment;
     private final CommentLine commentLine;
+    private final LiteralString literalString;
     private final LiteralChar literalChar;
+    private final Reserved reserved;
     private final ClassName className;
     private final Constant constant;
     private final Method method;
-    private final LiteralString literalString;
-    private final Reserved reserved;
-    
    
     /*[00]---------------------------------------------------------------------
     
@@ -72,7 +67,7 @@ public final class JavaSource2Html
      * 
      * @throws java.io.IOException
      */
-    public JavaSource2Html(final File file) throws IOException
+    public Styler(final File file) throws IOException
     {
       
         inputFile = file;
@@ -114,8 +109,10 @@ public final class JavaSource2Html
         int count = 0;
  
         while ((index = (str.indexOf('\n', index)) + 1) != 0) count++;
+        
+        if (str.charAt(str.length() - 1) != '\n') count++;
   
-        return (count + 1);
+        return count;
     }//countLines()
     
     /*[03]---------------------------------------------------------------------
@@ -128,8 +125,7 @@ public final class JavaSource2Html
         Elements.editedContent = 
             Elements.editedContent.replace("&", "&amp;").
             replace("<", "&lt;").replace(">", "&gt;").
-            replace(ASPAS_IN_STRING, FAKE_ASPAS_IN_STRING).
-            replace(ASPAS_IN_CHAR, FAKE_ASPAS_IN_CHAR);
+            replace("\r\n", "\n").replace("\r", "\n");
              
     }//readFile()
     
@@ -141,7 +137,7 @@ public final class JavaSource2Html
      * 
      * @throws IOException Em caso de erro de IO.
      */
-    public void createNewFile() throws IOException
+    public void createHtmlFile() throws IOException
     {
         readFile();
         
@@ -150,11 +146,11 @@ public final class JavaSource2Html
         int padding = getNumberOfDigits(countLinesReaded);
                  
         StringBuilder lineNumbers = 
-            new StringBuilder(padding * countLinesReaded + 1000);
+            new StringBuilder((padding + 5) * countLinesReaded + 100);
         
         lineNumbers.append("\n<div class=\"linenumber\">\n");
         
-        for (int line = 0; line <= countLinesReaded; line++)
+        for (int line = 1; line <= countLinesReaded; line++)
             lineNumbers.append(String.format("%0" + padding + "d</br>", line));
      
         lineNumbers.append("\n</div>\n");
@@ -174,9 +170,10 @@ public final class JavaSource2Html
             
         
         Elements.editedContent =
-            "<pre><code>\n" + 
-            Elements.editedContent.replace(FAKE_ASPAS_IN_STRING, ASPAS_IN_STRING).
-            replace(FAKE_ASPAS_IN_CHAR, ASPAS_IN_CHAR) +
+            "<pre><code>" + 
+            Elements.editedContent.
+            replace(Elements.FAKE_QUOT, "\"").
+            replace(Elements.FAKE_SLASH, "\\") +
             "\n</code></pre>";
            
         writeTextFile
@@ -188,12 +185,11 @@ public final class JavaSource2Html
             "px;\">\n" +
             lineNumbers.toString() +
             Elements.editedContent +
-            "\n</div>" +
+            "\n</div>\n" +
             FOOTER
         );
-        
-         
-    }//createNewFile()
+     
+    }//createHtmlFile()
       
     /*[05]---------------------------------------------------------------------
     
@@ -203,7 +199,7 @@ public final class JavaSource2Html
         fileChooserSettings();
            
         /*
-        Obtem o arquivoL com o fonte java
+        Obtem o arquivo com o fonte java
         */
         FileNameExtensionFilter filter = 
             new FileNameExtensionFilter("C\u00f3digo Fonte Java", "java");
@@ -214,16 +210,13 @@ public final class JavaSource2Html
         
         try
         {
-            JavaSource2Html j = new JavaSource2Html(file);
-            j.createNewFile();
+            Styler j = new Styler(file);
+            j.createHtmlFile();
         }
         catch (IOException ex)
         {
             System.err.println(ex);
         }
-    
-       
     }//main()
     
-}//classe JavaSource2Html
-
+}//classe Styler

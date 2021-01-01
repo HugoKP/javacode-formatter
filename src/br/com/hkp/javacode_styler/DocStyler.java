@@ -1,9 +1,9 @@
-package br.com.hkp.JavaCodeFormatter;
+package br.com.hkp.javacode_styler;
 
-import global.Global;
-import static global.Global.fileChooserSettings;
-import static global.Global.readTextFile;
-import static global.Global.writeTextFile;
+import br.com.hkp.javacode_styler.global.Global;
+import static br.com.hkp.javacode_styler.global.Global.fileChooserSettings;
+import static br.com.hkp.javacode_styler.global.Global.readTextFile;
+import static br.com.hkp.javacode_styler.global.Global.writeTextFile;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  * @author Hugo Kaulino Pereira
  *****************************************************************************/
-public final class CodeMarker
+public final class DocStyler
 {
     private static final HashMap<String, String> HASH_MAP = 
         new HashMap<>(1000);
@@ -129,4 +129,4 @@ public final class CodeMarker
         
     }//classe HtmlFilter
     
-}//classe CodeMarker
+}//classe DocStyler

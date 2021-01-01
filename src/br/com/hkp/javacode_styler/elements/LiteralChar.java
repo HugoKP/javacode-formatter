@@ -1,4 +1,4 @@
-package br.com.hkp.JavaCodeFormatter.elements;
+package br.com.hkp.javacode_styler.elements;
 
 import java.util.regex.Pattern;
 
@@ -17,7 +17,7 @@ public final class LiteralChar extends Elements
     @Override
     public void map()
     {
-        match = Pattern.compile("'.'").matcher(editedContent);
+        match = Pattern.compile("'.+?'").matcher(editedContent);
         
         mapOccurrences("literalchar", 0, false);
         

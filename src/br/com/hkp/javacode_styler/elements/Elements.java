@@ -1,4 +1,4 @@
-package br.com.hkp.JavaCodeFormatter.elements;
+package br.com.hkp.javacode_styler.elements;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,10 +18,11 @@ public abstract class Elements
         new HashMap<>(HASH_CAPACITY);
     
     protected static Matcher match;
-    
-    private static HashSet<String> set;
-    
+     
     private static int countElements = 0;
+    
+    public static final String FAKE_QUOT = "\uff02";
+    public static final String FAKE_SLASH = "\u20e0";
     
     /*[00]---------------------------------------------------------------------
     
@@ -36,13 +37,17 @@ public abstract class Elements
     -------------------------------------------------------------------------*/
     public void mapOccurrences
     (
-        final String typeOfClass,
+        String type,
         final int group,
         final boolean anchor
     ) 
     {
                
-        set = new HashSet<>(HASH_CAPACITY); 
+        HashSet<String> set = new HashSet<>(HASH_CAPACITY); 
+        
+        boolean commentLine = type.equals("commentLine");
+        
+        if (commentLine) type = "comment";
                    
         while (match.find()) set.add(match.group(group)); 
                     
@@ -55,13 +60,13 @@ public abstract class Elements
                     editedContent.replaceAll("\\b" + element + "\\b", mark);
             else
                 editedContent = editedContent.replace(element, mark);
+            
+            if (commentLine)
+                element = element.replace("\n", "</span>\n");
+            else
+                element = element + "</span>";
               
-            MAP.put
-            (
-                mark, 
-                "<span class=\"xw52fz_" + typeOfClass + "\">" + element + 
-                "</span>"
-            );
+            MAP.put(mark, "<span class=\"xw52fz_" + type + "\">" + element);
             
         }//for
         

@@ -1,4 +1,4 @@
-package br.com.hkp.JavaCodeFormatter.elements;
+package br.com.hkp.javacode_styler.elements;
 
 import java.util.regex.Pattern;
 

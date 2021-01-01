@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/javacode.css"/>
+	<title>Java Code</title>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+001</br>002</br>003</br>004</br>005</br>006</br>007</br>008</br>009</br>010</br>011</br>012</br>013</br>014</br>015</br>016</br>017</br>018</br>019</br>020</br>021</br>022</br>023</br>024</br>025</br>026</br>027</br>028</br>029</br>030</br>031</br>032</br>033</br>034</br>035</br>036</br>037</br>038</br>039</br>040</br>041</br>042</br>043</br>044</br>045</br>046</br>047</br>048</br>049</br>050</br>051</br>052</br>053</br>054</br>055</br>056</br>057</br>058</br>059</br>060</br>061</br>062</br>063</br>064</br>065</br>066</br>067</br>068</br>069</br>070</br>071</br>072</br>073</br>074</br>075</br>076</br>077</br>078</br>079</br>080</br>081</br>082</br>083</br>084</br>085</br>086</br>087</br>088</br>089</br>090</br>091</br>092</br>093</br>094</br>095</br>096</br>097</br>098</br>099</br>100</br>101</br>102</br>103</br>104</br>105</br>106</br>107</br>108</br>109</br>110</br>111</br>112</br>113</br>114</br>115</br>116</br>117</br>118</br>119</br>120</br>121</br>122</br>123</br>124</br>125</br>126</br>127</br>128</br>129</br>130</br>131</br>132</br>133</br>134</br>135</br>136</br>137</br>138</br>139</br>140</br>141</br>142</br>143</br>144</br>145</br>146</br>147</br>148</br>149</br>150</br>151</br>152</br>153</br>154</br>155</br>156</br>157</br>158</br>159</br>160</br>161</br>162</br>163</br>164</br>165</br>166</br>167</br>168</br>169</br>170</br>171</br>172</br>173</br>174</br>175</br>176</br>177</br>178</br>179</br>180</br>181</br>182</br>183</br>184</br>185</br>186</br>187</br>188</br>189</br>190</br>191</br>192</br>193</br>194</br>195</br>196</br>197</br>198</br>199</br>200</br>201</br>202</br>203</br>204</br>205</br>206</br>207</br>208</br>209</br>210</br>211</br>212</br>213</br>214</br>215</br>216</br>217</br>218</br>219</br>220</br>221</br>222</br>223</br>224</br>225</br>
+</div>
+<pre><code><span class="xw52fz_reserved">package</span> br.com.hkp.javacode_styler;
+
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">LiteralChar</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">ClassName</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">Comment</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">CommentLine</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">Constant</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">Elements</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">Method</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">LiteralString</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.elements.<span class="xw52fz_classname">Reserved</span>;
+<span class="xw52fz_reserved">import</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">fileChooserSettings</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">readTextFile</span>;
+<span class="xw52fz_reserved">import</span> <span class="xw52fz_reserved">static</span> br.com.hkp.javacode_styler.global.<span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">writeTextFile</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">File</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">IOException</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.filechooser.<span class="xw52fz_classname">FileNameExtensionFilter</span>;
+
+<span class="xw52fz_comment">/******************************************************************************
+ * A aplicacao converte um codigo fonte Java em um HTML que permite exibir este
+ * fonte no navegador web.
+ * 
+ * @since 27 de dezembro de 2020 v1.0
+ * @version 1.0
+ * @author Hugo Kaulino Pereira
+ *****************************************************************************/</span>
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">Styler</span>
+{
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">HEAD</span> =
+<span class="xw52fz_literalstring">"&lt;!DOCTYPE html&gt;\n"</span> +
+<span class="xw52fz_literalstring">"&lt;html lang=\"en\"&gt;\n"</span> +
+<span class="xw52fz_literalstring">"&lt;head&gt;\n"</span> +
+<span class="xw52fz_literalstring">"\t&lt;meta charset=\"UTF-8\"&gt;\n"</span> +
+<span class="xw52fz_literalstring">"\t&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt;\n"</span>
++
+<span class="xw52fz_literalstring">"\t&lt;link rel=\"stylesheet\" href=\"../css/javacode.css\"/&gt;\n"</span> +
+<span class="xw52fz_literalstring">"\t&lt;title&gt;Java Code&lt;/title&gt;\n"</span>  +  
+<span class="xw52fz_literalstring">"&lt;/head&gt;\n"</span> + 
+<span class="xw52fz_literalstring">"&lt;body&gt;\n"</span>;
+    
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">FOOTER</span> =
+<span class="xw52fz_literalstring">"&lt;/body&gt;\n"</span> + <span class="xw52fz_literalstring">"&lt;/html&gt;"</span>;
+    
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_constant">FAKE_QUOT_IN_STRING</span> = 
+        <span class="xw52fz_literalstring">"\\"</span> + <span class="xw52fz_classname">Elements</span>.<span class="xw52fz_constant">FAKE_QUOT</span>;
+      
+    <span class="xw52fz_comment">/*
+    Arquivo que serah lido e arquivo que sera gravado
+    */</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> inputFile;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> outputFile;
+    
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">Comment</span> comment;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">CommentLine</span> commentLine;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">LiteralString</span> literalString;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">LiteralChar</span> literalChar;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">Reserved</span> reserved;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">ClassName</span> className;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">Constant</span> constant;
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">Method</span> method;
+   
+    <span class="xw52fz_comment">/*[00]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Construtor da classe.
+     * 
+     * @param file O arquivo que deve ser processado
+     * 
+     * @throws java.io.IOException
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_classname">Styler</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> file) <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+      
+        inputFile = file;
+   
+        outputFile = 
+            <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">File</span>(inputFile.<span class="xw52fz_method">getAbsolutePath</span>().<span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">".java"</span>,<span class="xw52fz_literalstring">".html"</span>));
+             
+        comment = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">Comment</span>();
+        commentLine = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">CommentLine</span>();
+        literalChar = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">LiteralChar</span>();
+        className = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">ClassName</span>();
+        constant = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">Constant</span>();
+        method = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">Method</span>();
+        literalString = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">LiteralString</span>();
+        reserved = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">Reserved</span>();
+      
+    }<span class="xw52fz_comment">//construtor</span>
+ 
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+    Calcula quantos digitos tem o numero de linhas do programa. Serve para 
+    formatar a coluna com os indices das linhas do codigo fonte
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">int</span> <span class="xw52fz_method">getNumberOfDigits</span>(<span class="xw52fz_reserved">int</span> number)
+    {
+        <span class="xw52fz_reserved">int</span> digits = 1;
+        <span class="xw52fz_reserved">while</span> ((number = (number/10)) != 0) digits++;
+        <span class="xw52fz_reserved">return</span> digits;
+    }<span class="xw52fz_comment">//getNumberOfDigits()</span>
+    
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+    Conta quantas linhas tem a String que recebeu o conteudo do arquivo texto 
+    com o codigo fonte java.
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">int</span> <span class="xw52fz_method">countLines</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> str)
+    {
+        <span class="xw52fz_reserved">if</span> (str.<span class="xw52fz_method">length</span>() == 0) <span class="xw52fz_reserved">return</span> 0;
+        
+        <span class="xw52fz_reserved">int</span> index = 0;
+        <span class="xw52fz_reserved">int</span> count = 0;
+ 
+        <span class="xw52fz_reserved">while</span> ((index = (str.<span class="xw52fz_method">indexOf</span>(<span class="xw52fz_literalchar">'\n'</span>, index)) + 1) != 0) count++;
+        
+        <span class="xw52fz_reserved">if</span> (str.<span class="xw52fz_method">charAt</span>(str.<span class="xw52fz_method">length</span>() - 1) != <span class="xw52fz_literalchar">'\n'</span>) count++;
+  
+        <span class="xw52fz_reserved">return</span> count;
+    }<span class="xw52fz_comment">//countLines()</span>
+    
+    <span class="xw52fz_comment">/*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">private</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">readFile</span>() <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_classname">Elements</span>.editedContent = <span class="xw52fz_method">readTextFile</span>(inputFile);
+              
+        <span class="xw52fz_classname">Elements</span>.editedContent = 
+            <span class="xw52fz_classname">Elements</span>.editedContent.<span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">"&amp;"</span>, <span class="xw52fz_literalstring">"&amp;amp;"</span>).
+            <span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">"&lt;"</span>, <span class="xw52fz_literalstring">"&amp;lt;"</span>).<span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">"&gt;"</span>, <span class="xw52fz_literalstring">"&amp;gt;"</span>).
+            <span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">"\r\n"</span>, <span class="xw52fz_literalstring">"\n"</span>).<span class="xw52fz_method">replace</span>(<span class="xw52fz_literalstring">"\r"</span>, <span class="xw52fz_literalstring">"\n"</span>);
+             
+    }<span class="xw52fz_comment">//readFile()</span>
+    
+     <span class="xw52fz_comment">/*[04]---------------------------------------------------------------------
+        
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_comment">/**
+     * Grava um novo arquivo. 
+     * 
+     * @throws IOException Em caso de erro de IO.
+     */</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">createHtmlFile</span>() <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_method">readFile</span>();
+        
+        <span class="xw52fz_reserved">int</span> countLinesReaded = <span class="xw52fz_method">countLines</span>(<span class="xw52fz_classname">Elements</span>.editedContent);
+        
+        <span class="xw52fz_reserved">int</span> padding = <span class="xw52fz_method">getNumberOfDigits</span>(countLinesReaded);
+                 
+        <span class="xw52fz_classname">StringBuilder</span> lineNumbers = 
+            <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">StringBuilder</span>((padding + 5) * countLinesReaded + 100);
+        
+        lineNumbers.<span class="xw52fz_method">append</span>(<span class="xw52fz_literalstring">"\n&lt;div class=\"linenumber\"&gt;\n"</span>);
+        
+        <span class="xw52fz_reserved">for</span> (<span class="xw52fz_reserved">int</span> line = 1; line &lt;= countLinesReaded; line++)
+            lineNumbers.<span class="xw52fz_method">append</span>(<span class="xw52fz_classname">String</span>.<span class="xw52fz_method">format</span>(<span class="xw52fz_literalstring">"%0"</span> + padding + <span class="xw52fz_literalstring">"d&lt;/br&gt;"</span>, line));
+     
+        lineNumbers.<span class="xw52fz_method">append</span>(<span class="xw52fz_literalstring">"\n&lt;/div&gt;\n"</span>);
+      
+        comment.<span class="xw52fz_method">map</span>(); 
+        commentLine.<span class="xw52fz_method">map</span>();
+        literalString.<span class="xw52fz_method">map</span>();
+        literalChar.<span class="xw52fz_method">map</span>();
+        reserved.<span class="xw52fz_method">map</span>();
+        className.<span class="xw52fz_method">map</span>();
+        constant.<span class="xw52fz_method">map</span>();
+        method.<span class="xw52fz_method">map</span>();
+              
+        <span class="xw52fz_reserved">for</span>(<span class="xw52fz_classname">String</span> mark: <span class="xw52fz_classname">Elements</span>.<span class="xw52fz_constant">MAP</span>.<span class="xw52fz_method">keySet</span>())
+            <span class="xw52fz_classname">Elements</span>.editedContent = 
+                <span class="xw52fz_classname">Elements</span>.editedContent.<span class="xw52fz_method">replace</span>(mark, <span class="xw52fz_classname">Elements</span>.<span class="xw52fz_constant">MAP</span>.<span class="xw52fz_method">get</span>(mark));
+            
+        
+        <span class="xw52fz_classname">Elements</span>.editedContent =
+            <span class="xw52fz_literalstring">"&lt;pre&gt;&lt;code&gt;"</span> + 
+            <span class="xw52fz_classname">Elements</span>.editedContent.
+            <span class="xw52fz_method">replace</span>(<span class="xw52fz_classname">Elements</span>.<span class="xw52fz_constant">FAKE_QUOT</span>, <span class="xw52fz_literalstring">"\""</span>).
+            <span class="xw52fz_method">replace</span>(<span class="xw52fz_classname">Elements</span>.<span class="xw52fz_constant">FAKE_SLASH</span>,<span class="xw52fz_literalstring">"\\"</span>) +
+            <span class="xw52fz_literalstring">"\n&lt;/code&gt;&lt;/pre&gt;"</span>;
+           
+        <span class="xw52fz_method">writeTextFile</span>
+        (
+            outputFile,
+            <span class="xw52fz_constant">HEAD</span> +
+            <span class="xw52fz_literalstring">"\n&lt;div class=\"javacode\" style=\"width:"</span> +
+            (630 + padding * 9) +
+            <span class="xw52fz_literalstring">"px;\"&gt;\n"</span> +
+            lineNumbers.<span class="xw52fz_method">toString</span>() +
+            <span class="xw52fz_classname">Elements</span>.editedContent +
+            <span class="xw52fz_literalstring">"\n&lt;/div&gt;\n"</span> +
+            <span class="xw52fz_constant">FOOTER</span>
+        );
+     
+    }<span class="xw52fz_comment">//createHtmlFile()</span>
+      
+    <span class="xw52fz_comment">/*[05]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">main</span>(<span class="xw52fz_classname">String</span>[] args)
+    {
+        <span class="xw52fz_method">fileChooserSettings</span>();
+           
+        <span class="xw52fz_comment">/*
+        Obtem o arquivo com o fonte java
+        */</span>
+        <span class="xw52fz_classname">FileNameExtensionFilter</span> filter = 
+            <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">FileNameExtensionFilter</span>(<span class="xw52fz_literalstring">"C\u00f3digo Fonte Java"</span>, <span class="xw52fz_literalstring">"java"</span>);
+        
+        <span class="xw52fz_classname">File</span> file = <span class="xw52fz_classname">Global</span>.<span class="xw52fz_method">choose</span>(<span class="xw52fz_literalstring">"Selecione o arquivo"</span>, filter, false);
+        
+        <span class="xw52fz_reserved">if</span> (file == <span class="xw52fz_reserved">null</span>) <span class="xw52fz_classname">System</span>.<span class="xw52fz_method">exit</span>(0);
+        
+        <span class="xw52fz_reserved">try</span>
+        {
+            <span class="xw52fz_classname">Styler</span> j = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">Styler</span>(file);
+            j.<span class="xw52fz_method">createHtmlFile</span>();
+        }
+        <span class="xw52fz_reserved">catch</span> (<span class="xw52fz_classname">IOException</span> ex)
+        {
+            <span class="xw52fz_classname">System</span>.err.<span class="xw52fz_method">println</span>(ex);
+        }
+    }<span class="xw52fz_comment">//main()</span>
+    
+}//classe <span class="xw52fz_classname">Styler</span>
+</code></pre>
+</div>
+</body>
+</html>

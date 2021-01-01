@@ -1,4 +1,4 @@
-package global;
+package br.com.hkp.javacode_styler.global;
 
 import java.io.File;
 import java.io.FileWriter;
