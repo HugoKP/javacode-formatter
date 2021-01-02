@@ -1,12 +1,14 @@
-package br.com.hkp.javacode_styler.elements;
+package br.com.hkp.javacode_styler.tokens;
 
+import java.util.HashSet;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  *
  * @author userhugo
  */
-public final class Reserved extends Elements
+public final class Reserved extends Tokens
 {
     private static final String RESERVED_REGEX =
           "\\b"
@@ -69,11 +71,25 @@ public final class Reserved extends Elements
      *
      */
     @Override
-    public void map()
+    public void map() 
     {
-        match = Pattern.compile(RESERVED_REGEX).matcher(editedContent);
+               
+        HashSet<String> set = new HashSet<>(HASH_CAPACITY); 
         
-        mapOccurrences("reserved", 0, true);
+        Matcher match = Pattern.compile(RESERVED_REGEX).matcher(javaSourceCode);
+                         
+        while (match.find()) set.add(match.group()); 
+                    
+        for (String element: set)
+        {
+            String mark = getMark();
+          
+            javaSourceCode = 
+                javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
+             
+            MAP.put(mark, TAG + "reserved\">" + element + "</span>");
+            
+        }//for
         
     }//map()
     

@@ -4,9 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/elements/Elements.java</file>
-            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/elements/LiteralChar.java</file>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/DocStyler.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/elements/LiteralString.java</file>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/Styler.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/elements/ClassName.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/elements/Comment.java</file>
         </group>
     </open-files>
 </project-private>

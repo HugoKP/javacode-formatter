@@ -1,14 +1,14 @@
 package br.com.hkp.javacode_styler;
 
-import br.com.hkp.javacode_styler.elements.LiteralChar;
-import br.com.hkp.javacode_styler.elements.ClassName;
-import br.com.hkp.javacode_styler.elements.Comment;
-import br.com.hkp.javacode_styler.elements.CommentLine;
-import br.com.hkp.javacode_styler.elements.Constant;
-import br.com.hkp.javacode_styler.elements.Elements;
-import br.com.hkp.javacode_styler.elements.Method;
-import br.com.hkp.javacode_styler.elements.LiteralString;
-import br.com.hkp.javacode_styler.elements.Reserved;
+import br.com.hkp.javacode_styler.tokens.LiteralChar;
+import br.com.hkp.javacode_styler.tokens.ClassName;
+import br.com.hkp.javacode_styler.tokens.Comment;
+import br.com.hkp.javacode_styler.tokens.CommentLine;
+import br.com.hkp.javacode_styler.tokens.Constant;
+import br.com.hkp.javacode_styler.tokens.Tokens;
+import br.com.hkp.javacode_styler.tokens.Method;
+import br.com.hkp.javacode_styler.tokens.LiteralString;
+import br.com.hkp.javacode_styler.tokens.Reserved;
 import br.com.hkp.javacode_styler.global.Global;
 import static br.com.hkp.javacode_styler.global.Global.fileChooserSettings;
 import static br.com.hkp.javacode_styler.global.Global.readTextFile;
@@ -120,10 +120,10 @@ public final class Styler
     -------------------------------------------------------------------------*/
     private void readFile() throws IOException
     {
-        Elements.editedContent = readTextFile(inputFile);
+        Tokens.javaSourceCode = readTextFile(inputFile);
               
-        Elements.editedContent = 
-            Elements.editedContent.replace("&", "&amp;").
+        Tokens.javaSourceCode = 
+            Tokens.javaSourceCode.replace("&", "&amp;").
             replace("<", "&lt;").replace(">", "&gt;").
             replace("\r\n", "\n").replace("\r", "\n");
              
@@ -141,7 +141,7 @@ public final class Styler
     {
         readFile();
         
-        int countLinesReaded = countLines(Elements.editedContent);
+        int countLinesReaded = countLines(Tokens.javaSourceCode);
         
         int padding = getNumberOfDigits(countLinesReaded);
                  
@@ -164,27 +164,19 @@ public final class Styler
         constant.map();
         method.map();
               
-        for(String mark: Elements.MAP.keySet())
-            Elements.editedContent = 
-                Elements.editedContent.replace(mark, Elements.MAP.get(mark));
-            
-        
-        Elements.editedContent =
-            "<pre><code>" + 
-            Elements.editedContent.
-            replace(Elements.FAKE_QUOT, "\"").
-            replace(Elements.FAKE_SLASH, "\\") +
-            "\n</code></pre>";
+        Tokens.insertSpanTags();
+          
+        Tokens.javaSourceCode =
+            "<pre><code>" + Tokens.javaSourceCode + "\n</code></pre>";
            
         writeTextFile
-        (
-            outputFile,
+        (outputFile,
             HEAD +
             "\n<div class=\"javacode\" style=\"width:" +
             (630 + padding * 9) +
             "px;\">\n" +
             lineNumbers.toString() +
-            Elements.editedContent +
+            Tokens.javaSourceCode +
             "\n</div>\n" +
             FOOTER
         );
