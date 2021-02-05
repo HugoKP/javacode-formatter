@@ -101,6 +101,7 @@ public final class Global
     /*[04]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
+   @SuppressWarnings("ConvertToTryWithResources")
    public static void writeTextFile(final File file, final String content)
         throws IOException
     {

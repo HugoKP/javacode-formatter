@@ -39,7 +39,14 @@
     color: var(--javacode-comment-color);
 }
 
+.xw52fz_annotation
+{
+    color: var(--javacode-annotation-color);
+    font-weight: bolder;
+}
+
 .xw52fz_classname
 {
     font-weight: bolder;
 }
+

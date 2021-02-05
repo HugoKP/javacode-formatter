@@ -10,9 +10,9 @@ import br.com.hkp.javacode_styler.tokens.Method;
 import br.com.hkp.javacode_styler.tokens.LiteralString;
 import br.com.hkp.javacode_styler.tokens.Reserved;
 import br.com.hkp.javacode_styler.global.Global;
-import static br.com.hkp.javacode_styler.global.Global.fileChooserSettings;
 import static br.com.hkp.javacode_styler.global.Global.readTextFile;
 import static br.com.hkp.javacode_styler.global.Global.writeTextFile;
+import br.com.hkp.javacode_styler.tokens.Annotation;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -52,6 +52,7 @@ public final class Styler
     private final CommentLine commentLine;
     private final LiteralString literalString;
     private final LiteralChar literalChar;
+    private final Annotation annotation;
     private final Reserved reserved;
     private final ClassName className;
     private final Constant constant;
@@ -77,11 +78,12 @@ public final class Styler
              
         comment = new Comment();
         commentLine = new CommentLine();
+        literalString = new LiteralString();
         literalChar = new LiteralChar();
+        annotation = new Annotation();
         className = new ClassName();
         constant = new Constant();
         method = new Method();
-        literalString = new LiteralString();
         reserved = new Reserved();
       
     }//construtor
@@ -151,7 +153,11 @@ public final class Styler
         lineNumbers.append("\n<div class=\"linenumber\">\n");
         
         for (int line = 1; line <= countLinesReaded; line++)
-            lineNumbers.append(String.format("%0" + padding + "d</br>", line));
+        {  
+            String lineNumber = String.format("%0" + padding + "d", line);
+            lineNumbers.append("<span id=\"").append(lineNumber).append("\">").
+            append(lineNumber).append("</span></br>");
+        }
      
         lineNumbers.append("\n</div>\n");
       
@@ -159,6 +165,7 @@ public final class Styler
         commentLine.map();
         literalString.map();
         literalChar.map();
+        annotation.map();
         reserved.map();
         className.map();
         constant.map();
@@ -182,28 +189,49 @@ public final class Styler
         );
      
     }//createHtmlFile()
-      
+    
     /*[05]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/
+    public static void style(final File sourceFolder) throws IOException
+    {
+                
+        File[] listFiles = sourceFolder.listFiles();
+        
+        for (File file: listFiles)
+        {
+            if (file.getName().endsWith(".java"))
+            {
+                System.out.println(file.getName());
+                Styler j = new Styler(file);
+                j.createHtmlFile();
+            }
+            else if (file.isDirectory()) style(file);
+        }
+      
+    }//style()
+      
+    /*[06]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
     public static void main(String[] args)
     {
-        fileChooserSettings();
+        Global.fileChooserSettings();
            
         /*
-        Obtem o arquivo com o fonte java
+        Obtem o diretorio src do projeto
         */
         FileNameExtensionFilter filter = 
-            new FileNameExtensionFilter("C\u00f3digo Fonte Java", "java");
+            new FileNameExtensionFilter("Pasta src", "java");
         
-        File file = Global.choose("Selecione o arquivo", filter, false);
+        File sourceFolder =
+            Global.choose("Selecione a pasta src", filter, true);
         
-        if (file == null) System.exit(0);
+        if (sourceFolder == null) System.exit(0);
         
         try
         {
-            Styler j = new Styler(file);
-            j.createHtmlFile();
+            style(sourceFolder);
         }
         catch (IOException ex)
         {
@@ -211,4 +239,5 @@ public final class Styler
         }
     }//main()
     
+   
 }//classe Styler

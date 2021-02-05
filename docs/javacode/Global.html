@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/javacode.css"/>
+	<title>Java Code</title>
+</head>
+<body>
+
+<div class="javacode" style="width:657px;">
+
+<div class="linenumber">
+<span id="001">001</span></br><span id="002">002</span></br><span id="003">003</span></br><span id="004">004</span></br><span id="005">005</span></br><span id="006">006</span></br><span id="007">007</span></br><span id="008">008</span></br><span id="009">009</span></br><span id="010">010</span></br><span id="011">011</span></br><span id="012">012</span></br><span id="013">013</span></br><span id="014">014</span></br><span id="015">015</span></br><span id="016">016</span></br><span id="017">017</span></br><span id="018">018</span></br><span id="019">019</span></br><span id="020">020</span></br><span id="021">021</span></br><span id="022">022</span></br><span id="023">023</span></br><span id="024">024</span></br><span id="025">025</span></br><span id="026">026</span></br><span id="027">027</span></br><span id="028">028</span></br><span id="029">029</span></br><span id="030">030</span></br><span id="031">031</span></br><span id="032">032</span></br><span id="033">033</span></br><span id="034">034</span></br><span id="035">035</span></br><span id="036">036</span></br><span id="037">037</span></br><span id="038">038</span></br><span id="039">039</span></br><span id="040">040</span></br><span id="041">041</span></br><span id="042">042</span></br><span id="043">043</span></br><span id="044">044</span></br><span id="045">045</span></br><span id="046">046</span></br><span id="047">047</span></br><span id="048">048</span></br><span id="049">049</span></br><span id="050">050</span></br><span id="051">051</span></br><span id="052">052</span></br><span id="053">053</span></br><span id="054">054</span></br><span id="055">055</span></br><span id="056">056</span></br><span id="057">057</span></br><span id="058">058</span></br><span id="059">059</span></br><span id="060">060</span></br><span id="061">061</span></br><span id="062">062</span></br><span id="063">063</span></br><span id="064">064</span></br><span id="065">065</span></br><span id="066">066</span></br><span id="067">067</span></br><span id="068">068</span></br><span id="069">069</span></br><span id="070">070</span></br><span id="071">071</span></br><span id="072">072</span></br><span id="073">073</span></br><span id="074">074</span></br><span id="075">075</span></br><span id="076">076</span></br><span id="077">077</span></br><span id="078">078</span></br><span id="079">079</span></br><span id="080">080</span></br><span id="081">081</span></br><span id="082">082</span></br><span id="083">083</span></br><span id="084">084</span></br><span id="085">085</span></br><span id="086">086</span></br><span id="087">087</span></br><span id="088">088</span></br><span id="089">089</span></br><span id="090">090</span></br><span id="091">091</span></br><span id="092">092</span></br><span id="093">093</span></br><span id="094">094</span></br><span id="095">095</span></br><span id="096">096</span></br><span id="097">097</span></br><span id="098">098</span></br><span id="099">099</span></br><span id="100">100</span></br><span id="101">101</span></br><span id="102">102</span></br><span id="103">103</span></br><span id="104">104</span></br><span id="105">105</span></br><span id="106">106</span></br><span id="107">107</span></br><span id="108">108</span></br><span id="109">109</span></br><span id="110">110</span></br><span id="111">111</span></br><span id="112">112</span></br><span id="113">113</span></br><span id="114">114</span></br><span id="115">115</span></br><span id="116">116</span></br>
+</div>
+<pre><code><span class="xw52fz_reserved">package</span> br.com.hkp.javacode_styler.global;
+
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">File</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">FileWriter</span>;
+<span class="xw52fz_reserved">import</span> java.io.<span class="xw52fz_classname">IOException</span>;
+<span class="xw52fz_reserved">import</span> java.nio.charset.<span class="xw52fz_classname">StandardCharsets</span>;
+<span class="xw52fz_reserved">import</span> java.nio.file.<span class="xw52fz_classname">Files</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">JFileChooser</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.<span class="xw52fz_classname">UIManager</span>;
+<span class="xw52fz_reserved">import</span> javax.swing.filechooser.<span class="xw52fz_classname">FileNameExtensionFilter</span>;
+
+<span class="xw52fz_comment">/******************************************************************************
+ * A classe fornece metodos estaticos de inicializacao, navegacao no sistema de
+ * arquivo e leitura e gravacao de arquivos.
+ * 
+ * @since 27 de dezembro de 2020 v1.0
+ * @version 1.0
+ * @author Hugo Kaulino Pereira
+ *****************************************************************************/</span>
+<span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">class</span> <span class="xw52fz_classname">Global</span>
+{
+    <span class="xw52fz_comment">/*[01]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">fileChooserSettings</span>()
+    {
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.lookInLabelText"</span>, <span class="xw52fz_literalstring">"Selecionar"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.openButtonText"</span>, <span class="xw52fz_literalstring">"Abrir"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.cancelButtonText"</span>, <span class="xw52fz_literalstring">"Cancelar"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.fileNameLabelText"</span>, <span class="xw52fz_literalstring">"Nome do Arquivo"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.filesOfTypeLabelText"</span>, <span class="xw52fz_literalstring">"Tipo de Arquivo"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.folderNameLabelText"</span>, <span class="xw52fz_literalstring">"Selecionado"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>
+        (
+            <span class="xw52fz_literalstring">"FileChooser.openButtonToolTipText"</span>, <span class="xw52fz_literalstring">"Abrir o Arquivo Selecionado"</span>
+        ); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.cancelButtonToolTipText"</span>,<span class="xw52fz_literalstring">"Cancelar"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.fileNameHeaderText"</span>,<span class="xw52fz_literalstring">"Nome"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.upFolderToolTipText"</span>, <span class="xw52fz_literalstring">"Acima"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>
+        (
+            <span class="xw52fz_literalstring">"FileChooser.homeFolderToolTipText"</span>,
+            <span class="xw52fz_literalstring">"\u00c1rea de Trabalho"</span>
+        ); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.newFolderToolTipText"</span>,<span class="xw52fz_literalstring">"Nova Pasta"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.listViewButtonToolTipText"</span>,<span class="xw52fz_literalstring">"Lista"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.newFolderButtonText"</span>,<span class="xw52fz_literalstring">"Nova Pasta"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.renameFileButtonText"</span>, <span class="xw52fz_literalstring">"Renomear"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.deleteFileButtonText"</span>, <span class="xw52fz_literalstring">"Eliminar"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.filterLabelText"</span>, <span class="xw52fz_literalstring">"Tipo"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.detailsViewButtonToolTipText"</span>, <span class="xw52fz_literalstring">"Detalhes"</span>);
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.fileSizeHeaderText"</span>,<span class="xw52fz_literalstring">"Tamanho"</span>); 
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>
+        (
+            <span class="xw52fz_literalstring">"FileChooser.fileDateHeaderText"</span>, 
+            <span class="xw52fz_literalstring">"Data de Altera\u00e7\u00e3o."</span>
+        );
+      
+    }<span class="xw52fz_comment">//FileChooserSettings()</span>
+    
+    <span class="xw52fz_comment">/*[02]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">File</span> <span class="xw52fz_method">choose</span>
+    (
+        <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> title,
+        <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">FileNameExtensionFilter</span> filter, 
+        <span class="xw52fz_reserved">final</span> <span class="xw52fz_reserved">boolean</span> chooseDir
+    )
+    {
+        <span class="xw52fz_classname">UIManager</span>.<span class="xw52fz_method">put</span>(<span class="xw52fz_literalstring">"FileChooser.openDialogTitleText"</span>, title);
+        
+        <span class="xw52fz_classname">JFileChooser</span> fc = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">JFileChooser</span>();
+        
+        fc.<span class="xw52fz_method">setFileFilter</span>(filter);
+        
+        <span class="xw52fz_reserved">if</span> (chooseDir)
+            fc.<span class="xw52fz_method">setFileSelectionMode</span>(<span class="xw52fz_classname">JFileChooser</span>.<span class="xw52fz_constant">DIRECTORIES_ONLY</span>);
+        <span class="xw52fz_reserved">else</span>
+            fc.<span class="xw52fz_method">setFileSelectionMode</span>(<span class="xw52fz_classname">JFileChooser</span>.<span class="xw52fz_constant">FILES_ONLY</span>);
+
+        <span class="xw52fz_reserved">int</span> res = fc.<span class="xw52fz_method">showOpenDialog</span>(<span class="xw52fz_reserved">null</span>);
+
+        <span class="xw52fz_reserved">if</span>(res == <span class="xw52fz_classname">JFileChooser</span>.<span class="xw52fz_constant">APPROVE_OPTION</span>)
+            <span class="xw52fz_reserved">return</span> fc.<span class="xw52fz_method">getSelectedFile</span>();
+        <span class="xw52fz_reserved">else</span>
+            <span class="xw52fz_reserved">return</span> <span class="xw52fz_reserved">null</span>;
+        
+    }<span class="xw52fz_comment">//choose()</span>
+    
+    <span class="xw52fz_comment">/*[03]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+    <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_classname">String</span> <span class="xw52fz_method">readTextFile</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> file) <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_reserved">return</span> 
+            <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">String</span>(<span class="xw52fz_classname">Files</span>.<span class="xw52fz_method">readAllBytes</span>(file.<span class="xw52fz_method">toPath</span>()), <span class="xw52fz_classname">StandardCharsets</span>.<span class="xw52fz_constant">UTF_8</span>);
+       
+    }<span class="xw52fz_comment">//readTextFile()</span>
+    
+    <span class="xw52fz_comment">/*[04]---------------------------------------------------------------------
+    
+    -------------------------------------------------------------------------*/</span>
+   <span class="xw52fz_annotation">@SuppressWarnings</span>(<span class="xw52fz_literalstring">"ConvertToTryWithResources"</span>)
+   <span class="xw52fz_reserved">public</span> <span class="xw52fz_reserved">static</span> <span class="xw52fz_reserved">void</span> <span class="xw52fz_method">writeTextFile</span>(<span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">File</span> file, <span class="xw52fz_reserved">final</span> <span class="xw52fz_classname">String</span> content)
+        <span class="xw52fz_reserved">throws</span> <span class="xw52fz_classname">IOException</span>
+    {
+        <span class="xw52fz_classname">FileWriter</span> fw = <span class="xw52fz_reserved">new</span> <span class="xw52fz_classname">FileWriter</span>(file, <span class="xw52fz_classname">StandardCharsets</span>.<span class="xw52fz_constant">UTF_8</span>);
+               
+        fw.<span class="xw52fz_method">write</span>(content);
+        
+        fw.<span class="xw52fz_method">close</span>();
+  
+    }<span class="xw52fz_comment">//writeTextFile()</span>
+    
+}<span class="xw52fz_comment">//classe Global</span>
+
+</code></pre>
+</div>
+</body>
+</html>
