@@ -1,5 +1,6 @@
 package br.com.hkp.javacode_styler.tokens;
 
+import static br.com.hkp.javacode_styler.global.Global.DIF;
 import java.util.HashMap;
 
 /**
@@ -16,7 +17,6 @@ public abstract class Tokens
         new HashMap<>(HASH_CAPACITY);
     
     protected static final String FAKE_SLASH = "\u20e0";
-    private static final String DIF = "xw52fz_";
     protected static final String TAG = "<span class=\"" + DIF;
     
     private static int countElements = 0;

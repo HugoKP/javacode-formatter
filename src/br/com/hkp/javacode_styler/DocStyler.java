@@ -1,6 +1,7 @@
 package br.com.hkp.javacode_styler;
 
 import br.com.hkp.javacode_styler.global.Global;
+import static br.com.hkp.javacode_styler.global.Global.DIF;
 import static br.com.hkp.javacode_styler.global.Global.fileChooserSettings;
 import static br.com.hkp.javacode_styler.global.Global.readTextFile;
 import static br.com.hkp.javacode_styler.global.Global.writeTextFile;
@@ -28,7 +29,8 @@ public final class DocStyler
     -------------------------------------------------------------------------*/
     private static void collectElements(final File dir) throws IOException
     {
-        Pattern REGEX = Pattern.compile("<span class=\"xw52fz_.+?</span>");
+        Pattern REGEX = 
+            Pattern.compile("<span class=\"" + DIF + ".+?</span>");
         
         File[] listFiles = dir.listFiles(new HtmlFilter());
         
@@ -53,7 +55,7 @@ public final class DocStyler
         }//for
         
         
-    }//map()
+    }//collectElements()
     
     /*[02]---------------------------------------------------------------------
     
@@ -66,10 +68,10 @@ public final class DocStyler
         {
             htmlContent = htmlContent.replace(element, HASH_MAP.get(element));
         }//for
-        
+         
         writeTextFile(file, htmlContent);
         
-    }//editHtml()
+    }//editDocumentation()
     
     /*[03]---------------------------------------------------------------------
     
@@ -97,12 +99,13 @@ public final class DocStyler
             */
             filter = new FileNameExtensionFilter("HTML", "html", "htm", "HTML");
 
-            File documentationFile = Global.choose
-                        (
-                            "Selecione o arquivo HTML a ser editado",
-                            filter,
-                            false
-                        );
+            File documentationFile = 
+                Global.choose
+                (
+                    "Selecione o arquivo HTML a ser editado",
+                    filter,
+                    false
+                );
 
             if (documentationFile == null) System.exit(0);
              

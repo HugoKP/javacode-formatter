@@ -37,6 +37,11 @@ div.javacode div.linenumber
     font-family: 'Courier New', Courier, monospace;
 }
 
+div.javacode div.linenumber span
+{
+    display: block;
+}
+
 
 
 

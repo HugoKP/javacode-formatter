@@ -156,7 +156,7 @@ public final class Styler
         {  
             String lineNumber = String.format("%0" + padding + "d", line);
             lineNumbers.append("<span id=\"").append(lineNumber).append("\">").
-            append(lineNumber).append("</span></br>");
+            append(lineNumber).append("</span>");
         }
      
         lineNumbers.append("\n</div>\n");
@@ -177,7 +177,7 @@ public final class Styler
             "<pre><code>" + Tokens.javaSourceCode + "\n</code></pre>";
            
         writeTextFile
-        (outputFile,
+        (   outputFile,
             HEAD +
             "\n<div class=\"javacode\" style=\"width:" +
             (630 + padding * 9) +

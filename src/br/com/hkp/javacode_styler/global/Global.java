@@ -19,6 +19,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *****************************************************************************/
 public final class Global
 {
+    /*
+    Prefixo dos valores dos atributos class nas tags span que estilizam
+    identificadores (de classes, de metodos, etc...) em codigos fonte java
+    */
+    public static final String DIF = "xw52fz_";
+    
     /*[01]---------------------------------------------------------------------
     
     -------------------------------------------------------------------------*/
