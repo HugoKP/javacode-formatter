@@ -27,16 +27,18 @@ public final class Method extends Tokens
                           
         while (match.find()) set.add(match.group(1)); 
                     
-        for (String element: set)
-        {
-            String mark = getMark();
-            
-            javaSourceCode = 
-                javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
-              
-            MAP.put(mark, TAG + "method\">" + element + "</span>");
-            
-        }//for
+        set.forEach
+        (
+            element ->
+            {
+                String mark = getMark();
+
+                javaSourceCode =
+                        javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
+
+                MAP.put(mark, TAG + "method\">" + element + "</span>");
+            }
+        ); //for
         
     }//map()
     

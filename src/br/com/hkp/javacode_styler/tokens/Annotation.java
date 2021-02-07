@@ -27,15 +27,17 @@ public final class Annotation extends Tokens
                           
         while (match.find()) set.add(match.group()); 
                     
-        for (String element: set)
-        {
-            String mark = getMark();
-            
-            javaSourceCode = javaSourceCode.replace(element, mark);
-              
-            MAP.put(mark, TAG + "annotation\">" + element + "</span>");
-            
-        }//for
+        set.forEach
+        (
+            element ->
+            {
+                String mark = getMark();
+
+                javaSourceCode = javaSourceCode.replace(element, mark);
+
+                MAP.put(mark, TAG + "annotation\">" + element + "</span>");
+            }
+        );//for
         
     }//map()
     

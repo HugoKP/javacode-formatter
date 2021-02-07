@@ -27,16 +27,18 @@ public final class ClassName extends Tokens
                                 
         while (match.find()) set.add(match.group()); 
                     
-        for (String element: set)
-        {
-            String mark = getMark();
-            
-            javaSourceCode = 
-                javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
-                      
-            MAP.put(mark, TAG + "classname\">" + element + "</span>");
-            
-        }//for
+        set.forEach
+        (
+            element ->
+            {
+                String mark = getMark();
+
+                javaSourceCode =
+                        javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
+
+                MAP.put(mark, TAG + "classname\">" + element + "</span>");
+            }
+        ); //for
         
     }//map()
     

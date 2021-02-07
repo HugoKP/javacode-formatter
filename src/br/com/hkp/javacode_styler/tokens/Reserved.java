@@ -11,8 +11,7 @@ import java.util.regex.Pattern;
 public final class Reserved extends Tokens
 {
     private static final String RESERVED_REGEX =
-          "\\b"
-        + "(abstract|"
+          "\\b(abstract|"
         + "assert|"
         + "boolean|"
         + "break|"
@@ -73,23 +72,24 @@ public final class Reserved extends Tokens
     @Override
     public void map() 
     {
-               
         HashSet<String> set = new HashSet<>(HASH_CAPACITY); 
         
         Matcher match = Pattern.compile(RESERVED_REGEX).matcher(javaSourceCode);
                          
         while (match.find()) set.add(match.group()); 
                     
-        for (String element: set)
-        {
-            String mark = getMark();
-          
-            javaSourceCode = 
-                javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
-             
-            MAP.put(mark, TAG + "reserved\">" + element + "</span>");
-            
-        }//for
+        set.forEach
+        (
+            element ->
+            {
+                String mark = getMark();
+
+                javaSourceCode =
+                        javaSourceCode.replaceAll("\\b" + element + "\\b", mark);
+
+                MAP.put(mark, TAG + "reserved\">" + element + "</span>");
+            }
+        );//for
         
     }//map()
     

@@ -27,20 +27,22 @@ public final class LiteralChar extends Tokens
                       
         while (match.find()) set.add(match.group(2)); 
                     
-        for (String element: set)
-        {
-            String mark = getMark();
-            
-            javaSourceCode = javaSourceCode.replace(element, mark);
-              
-            MAP.put
-            (
-                mark, 
-                TAG + "literalchar\">" + element.replace(FAKE_SLASH, "\\") + 
-                "</span>"
-            );
-            
-        }//for
+        set.forEach
+        (
+            element ->
+            {
+                String mark = getMark();
+
+                javaSourceCode = javaSourceCode.replace(element, mark);
+
+                MAP.put
+                (
+                    mark,
+                    TAG + "literalchar\">" + element.replace(FAKE_SLASH, "\\")
+                     + "</span>"
+                );
+            }
+        ); //for
         
     }//map()
     

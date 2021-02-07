@@ -24,19 +24,21 @@ public final class CommentLine extends Tokens
                            
         while (match.find()) set.add(match.group()); 
                     
-        for (String element: set)
-        {
-            String mark = getMark();
-            
-            javaSourceCode = javaSourceCode.replace(element, mark);
-                          
-            MAP.put
-            (
-                mark,
-                TAG + "comment\">" + element.replace("\n", "</span>\n")
-            );
-            
-        }//for
+        set.forEach
+        (
+           element ->
+            {
+                String mark = getMark();
+
+                javaSourceCode = javaSourceCode.replace(element, mark);
+
+                MAP.put
+                (
+                    mark,
+                    TAG + "comment\">" + element.replace("\n", "</span>\n")
+                );
+            }
+        ); //for
         
     }//map()
     

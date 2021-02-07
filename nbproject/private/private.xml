@@ -4,14 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/global/Global.java</file>
-            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/Styler.html</file>
-            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Comment.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/DocStyler.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/LiteralChar.java</file>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Tokens.java</file>
-            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Reserved.java</file>
-            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Method.java</file>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/Styler.java</file>
             <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Annotation.java</file>
-            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/DocStyler.html</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/ClassName.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Comment.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Constant.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Reserved.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/Method.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/LiteralString.java</file>
+            <file>file:/home/userhugo/Desenvolvimento/Java/NetBeansProjects/javacode-styler/src/br/com/hkp/javacode_styler/tokens/CommentLine.java</file>
         </group>
     </open-files>
 </project-private>
