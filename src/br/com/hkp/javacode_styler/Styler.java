@@ -13,6 +13,7 @@ import br.com.hkp.javacode_styler.global.Global;
 import static br.com.hkp.javacode_styler.global.Global.readTextFile;
 import static br.com.hkp.javacode_styler.global.Global.writeTextFile;
 import br.com.hkp.javacode_styler.tokens.Annotation;
+import br.com.hkp.javacode_styler.tokens.Constructor;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -57,6 +58,7 @@ public final class Styler
     private final ClassName className;
     private final Constant constant;
     private final Method method;
+    private final Constructor constructor;
    
     /*[00]---------------------------------------------------------------------
     
@@ -85,7 +87,8 @@ public final class Styler
         constant = new Constant();
         method = new Method();
         reserved = new Reserved();
-      
+        constructor = new Constructor();
+           
     }//construtor
  
     /*[01]---------------------------------------------------------------------
@@ -170,6 +173,7 @@ public final class Styler
         className.map();
         constant.map();
         method.map();
+        constructor.map();
               
         Tokens.insertSpanTags();
           

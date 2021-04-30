@@ -28,6 +28,13 @@
     font-style: italic;
 }
 
+.xw52fz_constructor
+{
+    color: var(--javacode-method-color);
+    font-weight: bolder;
+    font-style: italic;
+}
+
 .xw52fz_function
 {
     color: var(--javacode-method-color);
