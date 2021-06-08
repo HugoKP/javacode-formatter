@@ -15,7 +15,8 @@ public class Javadoc {
     //Comentario de linha iniciando com 3 barras (///)
     private static final String TAG = "\\/{3}.*\\n";
     
-    private static final Pattern ATRIB_REGEXP = 
+    //Regexp para localizar declaracoes de campos de uma classe
+    private static final Pattern FIELD_REGEXP = 
        Pattern.compile(TAG + "([^(]+?(=(.|\\n)+?)?;)"); 
     
     private static final Pattern METHOD_REGEXP =
@@ -34,7 +35,7 @@ public class Javadoc {
               
         String s = readTextFile(new File("Styler.java"));
         
-        Matcher m = ATRIB_REGEXP.matcher(s);
+        Matcher m = FIELD_REGEXP.matcher(s);
         
         System.out.println("Localizando campos...\n");
         
